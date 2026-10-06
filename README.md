@@ -1,8 +1,8 @@
 # market-log
 
-Hourly snapshots of the [Velque](https://usevelque.xyz) test market, taken straight from Solana.
+Daily snapshots of the [Velque](https://usevelque.xyz) test market, taken straight from Solana.
 
-Once an hour a GitHub Action reads every market from chain and appends one line per market to `data/YYYY-MM-DD.jsonl`. The newest snapshot is also written to [LATEST.md](LATEST.md) as a table.
+Once a day a GitHub Action reads every market from chain and appends one line per market to `data/YYYY-MM-DD.jsonl`. The newest snapshot is also written to [LATEST.md](LATEST.md) as a table.
 
 ## What a line holds
 
@@ -17,7 +17,7 @@ Once an hour a GitHub Action reads every market from chain and appends one line 
 | `bestBid`, `bestAsk`, `dayOrders` | Top of the day book and its size |
 | `storedAuctions` | Every cleared window still on chain: id, time, price, volume, whether it was an opening cross, and the result of replaying it |
 
-`nasdaq` and `session` are recorded separately on purpose. They should agree within a few minutes of each bell. A longer disagreement means the oracle stopped posting, and the log shows exactly when.
+`nasdaq` and `session` are recorded separately on purpose. They should agree within a few minutes of each bell. A longer disagreement means the oracle stopped posting, and the log records it.
 
 ## Replay
 

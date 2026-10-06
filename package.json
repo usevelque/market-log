@@ -2,7 +2,7 @@
   "name": "velque-market-log",
   "version": "0.1.0",
   "private": true,
-  "description": "Hourly on-chain snapshots of the Velque test market",
+  "description": "Daily on-chain snapshots of the Velque test market",
   "type": "module",
   "scripts": {
     "snapshot": "node snapshot.mjs"

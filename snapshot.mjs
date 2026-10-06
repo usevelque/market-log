@@ -1,5 +1,5 @@
 // Take one snapshot of every Velque market straight from chain and append it
-// to data/YYYY-MM-DD.jsonl. Runs hourly from GitHub Actions.
+// to data/YYYY-MM-DD.jsonl. Runs once a day from GitHub Actions.
 //
 // Each line records what a trader would have seen at that moment: the session,
 // the reference price and its age, the current auction window, the best bid
