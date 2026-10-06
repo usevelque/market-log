@@ -1,0 +1,28 @@
+{
+  "cluster": "devnet",
+  "program": "MXG3VzXQucitJ4MSWWd1ddEat5FRS8KFF5j1uZRW7jz",
+  "marketMaker": "38723mSCpCgWg2VLbguHzzfqifBdXHMMBtjZGRWYux7q",
+  "markets": [
+    {
+      "symbol": "NVDA",
+      "token": "tNVDAx",
+      "market": "D7eareS94eDwofGZQHJK3egWz21hFbKAoYsh6CHBKSxU",
+      "baseMint": "98iqgCLWRHybNpiH35Axk1Tdhx5FFj4DGBJYvNRG44Nv",
+      "baseDecimals": 8
+    },
+    {
+      "symbol": "TSLA",
+      "token": "tTSLAx",
+      "market": "38TWU27AJKSoZNgPNXgjJj7Ca79CTmMjVwTD8dnHBt1V",
+      "baseMint": "HQHrqJgS8M1kSkHJg3Ad2J7TcpB1QZuobngytvBYTH67",
+      "baseDecimals": 8
+    },
+    {
+      "symbol": "AAPL",
+      "token": "tAAPLx",
+      "market": "69Y5pKhoXk9HxBTYqpQwYWEPtZb9nrD9oDP9XdHe3GWy",
+      "baseMint": "BrE2dpD3Jb4pCcYcev8HRLKiTKyog7YQs6LTquVnjDtz",
+      "baseDecimals": 8
+    }
+  ]
+}

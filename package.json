@@ -1,0 +1,15 @@
+{
+  "name": "velque-market-log",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Hourly on-chain snapshots of the Velque test market",
+  "type": "module",
+  "scripts": {
+    "snapshot": "node snapshot.mjs"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@solana/web3.js": "^1.99.0",
+    "velque-sdk": "github:usevelque/velque-sdk"
+  }
+}

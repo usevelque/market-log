@@ -1,0 +1,35 @@
+name: hourly snapshot
+
+on:
+  schedule:
+    - cron: '7 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: snapshot
+  cancel-in-progress: false
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install --no-audit --no-fund
+      - run: node snapshot.mjs
+        env:
+          VELQUE_RPC: ${{ secrets.VELQUE_RPC }}
+      - name: commit
+        run: |
+          git config user.name "Velque"
+          git config user.email "180978138+usevelque@users.noreply.github.com"
+          git add data LATEST.md
+          git diff --cached --quiet && exit 0
+          git commit -m "snapshot $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push
