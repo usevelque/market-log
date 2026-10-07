@@ -1,31 +1,42 @@
 name: daily snapshot
 
 # One snapshot a day. GitHub delays and drops `schedule` on quiet repositories,
-# so there are four ticks and the first one that fires does the work: the rest
-# see today's file and stop.
+# so the workflow keeps its own time: a chain run takes today's snapshot if there
+# is none yet, waits five and a half hours and starts the next run of itself.
+# The cron ticks are only a safety net for a chain that died.
+#
+# A run started by hand always takes a snapshot and does not join the chain.
 
 on:
   schedule:
     - cron: '23 13,16,19,22 * * *'
   workflow_dispatch:
+    inputs:
+      chain:
+        description: Set by the workflow itself when it hands over to the next run
+        type: string
+        default: ''
 
 permissions:
   contents: write
+  actions: write            # needed to hand over to the next run
 
 concurrency:
-  group: snapshot
+  group: ${{ (github.event_name == 'schedule' || inputs.chain == 'true') && 'snapshot-chain' || format('snapshot-manual-{0}', github.run_id) }}
   cancel-in-progress: false
 
 jobs:
   snapshot:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 350
+    env:
+      CHAIN: ${{ github.event_name == 'schedule' || inputs.chain == 'true' }}
     steps:
       - uses: actions/checkout@v4
       - name: once a day
         id: gate
         run: |
-          if [ "${{ github.event_name }}" = "schedule" ] && [ -f "data/$(date -u +%F).jsonl" ]; then
+          if [ "$CHAIN" = "true" ] && [ -f "data/$(date -u +%F).jsonl" ]; then
             echo "today's snapshot is already in"
             echo "skip=true" >> "$GITHUB_OUTPUT"
           fi
@@ -48,3 +59,14 @@ jobs:
           git diff --cached --quiet && exit 0
           git commit -m "snapshot $(date -u +%Y-%m-%dT%H:%MZ)"
           git push
+
+      - name: wait for the next check
+        if: env.CHAIN == 'true'
+        run: sleep 19800
+
+      - name: hand over to the next run
+        if: always() && env.CHAIN == 'true'
+        run: |
+          # a run that broke must not restart itself in a tight loop
+          [ "${{ job.status }}" = "success" ] || sleep 600
+          curl -sS -X POST             -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}"             -H "Accept: application/vnd.github+json"             "https://api.github.com/repos/${{ github.repository }}/actions/workflows/snapshot.yml/dispatches"             -d '{"ref":"main","inputs":{"chain":"true"}}'
