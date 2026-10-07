@@ -1,8 +1,18 @@
 # market-log
 
+[![auction replay](https://img.shields.io/github/actions/workflow/status/usevelque/market-log/snapshot.yml?branch=main&label=auction%20replay&style=flat-square&labelColor=2a1228)](https://github.com/usevelque/market-log/actions/workflows/snapshot.yml)
+[![license](https://img.shields.io/badge/license-MIT-f58aae?style=flat-square&labelColor=2a1228)](LICENSE)
+
 Daily snapshots of the [Velque](https://usevelque.xyz) test market, taken straight from Solana.
 
 Once a day a GitHub Action reads every market from chain and appends one line per market to `data/YYYY-MM-DD.jsonl`. The newest snapshot is also written to [LATEST.md](LATEST.md) as a table.
+
+<a href="https://usevelque.xyz/app">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/usevelque/usevelque/output/board-dark.svg">
+    <img src="https://raw.githubusercontent.com/usevelque/usevelque/output/board-light.svg" alt="The Velque test market right now, read from Solana devnet" width="100%">
+  </picture>
+</a>
 
 ## What a line holds
 
