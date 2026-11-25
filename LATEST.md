@@ -1,11 +1,11 @@
 # Latest snapshot
 
-Taken 2026-11-24T01:17:10.000Z from Solana devnet. Nasdaq is closed.
+Taken 2026-11-25T04:48:58.000Z from Solana devnet. Nasdaq is closed.
 
 | Token | Session | Reference | Ref age | Last price | Best bid | Best ask | Window | Orders waiting |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| tNVDAx | dark | 164.93 | 980811s | 229.70 | 164.67 | 165.35 | #11871 | 0 |
-| tTSLAx | dark | 391.82 | 980807s | n/a | 390.95 | 392.53 | #11542 | 0 |
-| tAAPLx | dark | 358.46 | 980815s | n/a | 357.71 | 359.15 | #11698 | 0 |
+| tNVDAx | dark | 164.93 | 1079919s | 229.70 | 164.67 | 165.35 | #11871 | 0 |
+| tTSLAx | dark | 391.82 | 1079915s | n/a | 390.95 | 392.53 | #11542 | 0 |
+| tAAPLx | dark | 358.46 | 1079923s | n/a | 357.71 | 359.15 | #11698 | 0 |
 
 Auctions stored on chain and replayed in this run: 2, mismatches: 0.
